@@ -80,6 +80,8 @@ public class Foundation {
         System.out.println("74. Floyd Iso Triangle ");
         System.out.println("75. Pascal Triangle ");
         System.out.println("76. Alphabet Triangle ");
+        System.out.println("77. Alphabet Pyramid ");
+        System.out.println("78. Hourglass Pattern ");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -235,6 +237,10 @@ public class Foundation {
             PascalTriangle();
         } else if (choice == 76) {
             AlphabetTriangle();
+        } else if (choice == 77) {
+            AlphabetPyramid();
+        } else if (choice == 78) {
+            HourglassPattern();
         }
     }
 
@@ -1711,7 +1717,52 @@ public class Foundation {
     }
     static void AlphabetPyramid(){
         Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i=1;i<=a;i++){
+            char b='A';
+            for (j=a-i;j>=1;j--){
+                System.out.print(" ");
+            }
+            for (j=1;j<=2*i-1;j++){
+                for (j=1;j<=2*i-1;j++){
+                    if (j<=(2*i-1)/2 && j<=2*i-1){
+                        System.out.print(b);
+                        b++;}
+                    else if (j>=(2*i-1)/2 && j<=2*i-1)
+                    {
+                        b--;
+                        System.out.print(b);
+
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void HourglassPattern(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i = a; i >= 1; i--) {
+            for (j = 1; j <= a - i; j++) {
+                System.out.print(" ");
+            }
+            for (j = 1; j <= 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (i = 2; i <= a; i++) {
+            for (j = a - i; j >= 1; j--) {
+                System.out.print(" ");
+            }
+            for (j = 1; j <= 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
     }
 
 
