@@ -82,6 +82,8 @@ public class Foundation {
         System.out.println("76. Alphabet Triangle ");
         System.out.println("77. Alphabet Pyramid ");
         System.out.println("78. Hourglass Pattern ");
+        System.out.println("79. Zigzag Pattern ");
+        System.out.println("80. Zigzag Pattern Vertical");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -241,6 +243,10 @@ public class Foundation {
             AlphabetPyramid();
         } else if (choice == 78) {
             HourglassPattern();
+        } else if (choice == 79) {
+            ZigzagPattern();
+        } else if (choice == 80) {
+            ZigzagPattern2();
         }
     }
 
@@ -1760,6 +1766,42 @@ public class Foundation {
             }
             for (j = 1; j <= 2 * i - 1; j++) {
                 System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    static void ZigzagPattern(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i=1;i<=3;i++){
+            for (j=1;j<=a;j++){
+               if ((i == 1 && j % 4 == 1)
+                        || (i == 2 && j % 2 == 0)
+                        || (i == 3 && j % 4 == 3)) {
+                System.out.print("*");}
+                else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void ZigzagPattern2(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i=1;i<=a;i++){
+            for (j=1;j<=3;j++){
+                if ((j == 1 && i % 4 == 1)
+                        || (j == 2 && i % 2 == 0)
+                        || (j == 3 && i % 4 == 3)) {
+                    System.out.print("*");}
+                else {
+                    System.out.print("   ");
+                }
             }
             System.out.println();
         }
