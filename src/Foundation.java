@@ -84,6 +84,12 @@ public class Foundation {
         System.out.println("78. Hourglass Pattern ");
         System.out.println("79. Zigzag Pattern ");
         System.out.println("80. Zigzag Pattern Vertical");
+        System.out.println("81. Hollow Pyramid");
+        System.out.println("82. Inverted Hollow Pyramid");
+        System.out.println("83. Binary Triangle");
+        System.out.println("84. Zero to One Triangle");
+        System.out.println("85. Mirror Triangle");
+        System.out.println("86. Hour glass Pattern");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -247,6 +253,18 @@ public class Foundation {
             ZigzagPattern();
         } else if (choice == 80) {
             ZigzagPattern2();
+        } else if (choice == 81) {
+            HollowPyramid();
+        } else if (choice == 82) {
+            InvertedHollowTriangle();
+        } else if (choice == 83) {
+            BinaryTriangle();
+        } else if (choice == 84) {
+            ZeroToOneTriangle();
+        } else if (choice == 85) {
+            MirrorTriangle();
+        } else if (choice == 86) {
+            HourGlassPattern();
         }
     }
 
@@ -1807,6 +1825,124 @@ public class Foundation {
         }
     }
 
+    static void HollowPyramid(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i=1;i<=a;i++){
+            for (j=a-i;j>=1;j--){
+                System.out.print(" ");
+            }
+            for (j=1;j<=2*i-1;j++){
+                if (i==1||i==a||j==2*i-1||j==1){
+                System.out.print("*");
+                }
+                else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void InvertedHollowTriangle(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i=a;i>=1;i--){
+            for (j=a-i;j>=1;j--){
+                System.out.print(" ");
+            }
+            for (j=1;j<=2*i-1;j++){
+                if (j==1||i==1||i==a||j==2*i-1) {
+                    System.out.print("*");
+                }
+                else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void BinaryTriangle(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a  = sc.nextInt(),i,j;
+        for (i=1;i<=a;i++){
+            for (j=1;j<=i;j++){
+                if ((i+j)%2==0){
+                System.out.print("1");
+            }
+                else{
+                    System.out.print("0");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void ZeroToOneTriangle(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a  = sc.nextInt(),i,j;
+        for (i=1;i<=a;i++){
+            for (j=1;j<=i;j++){
+                if (j%2==0){
+                    System.out.print("1");
+                }
+                else{
+                    System.out.print("0");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    static void MirrorTriangle(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a =sc.nextInt(),i,j;
+        for (i=a;i>=1;i--){
+            for (j = 1; j <=a - i; j++) {
+                System.out.print(" ");
+            }
+            for(j=i;j>=1;j--){
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+    static void HourGlassPattern(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt(),i,j;
+        for (i=a;i>=1;i--){
+            for (j=1;j<=a-i;j++){
+                System.out.print(" ");
+            }
+            for (j=1;j<=2*i-1;j++){
+
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (i=2;i<=a;i++){
+            for (j=a-i;j>=1;j--){
+                System.out.print(" ");
+            }
+            for (j=1;j<=2*i-1;j++){
+              if  (i==1||i==a||j==2*i-1||j==1){
+                System.out.print("*");}
+
+              else {
+                System.out.print(" ");
+            }}
+            System.out.println();
+        }
+
+
+    }
 
 
     void main() {
