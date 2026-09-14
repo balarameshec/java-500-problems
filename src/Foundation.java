@@ -90,6 +90,10 @@ public class Foundation {
         System.out.println("84. Zero to One Triangle");
         System.out.println("85. Mirror Triangle");
         System.out.println("86. Hour glass Pattern");
+        System.out.println("87. Heart Pattern");
+        System.out.println("88. Array input and output");
+        System.out.println("89. Sum of an array");
+        System.out.println("90. Average of an array");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -265,6 +269,14 @@ public class Foundation {
             MirrorTriangle();
         } else if (choice == 86) {
             HourGlassPattern();
+        } else if (choice == 87) {
+            HeartPattern();
+        } else if (choice == 88) {
+            ArrayIO();
+        } else if (choice == 89) {
+            ArraySum();
+        } else if (choice == 90) {
+            AverageArray();
         }
     }
 
@@ -1913,36 +1925,141 @@ public class Foundation {
             System.out.println();
         }
     }
-    static void HourGlassPattern(){
+    static void HourGlassPattern() throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a number: ");
-        int a = sc.nextInt(),i,j;
-        for (i=a;i>=1;i--){
-            for (j=1;j<=a-i;j++){
+        int a = sc.nextInt(),i,j,moved = 0;
+        while (moved <= 2 * a - 1) {
+            // Clear screen effect
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            for (i = a; i >= 1; i--) {
+                for (j = 1; j <= a - i; j++) {
+                    System.out.print(" ");
+                }
+                for (j = 1; j <= 2 * i - 1; j++) {
+                    int starPosition = 2 * i - j;
+                    if (starPosition <= moved) {
+                        System.out.print(" ");
+                    } else {
+                        System.out.print("*");
+                    }
+                }
+                System.out.println();
+            }
+            for (i = 2; i <= a; i++) {
+                for (j = a - i; j >= 1; j--) {
+                    System.out.print(" ");
+                }
+                for (j = 1; j <= 2 * i - 1; j++) {
+                    if (i == 1 || i == a || j == 2 * i - 1 || j == 1) {
+                        System.out.print("*");
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+                System.out.println();
+            }
+            Thread.sleep(200);
+
+            moved++;
+        }
+    }
+
+    static void HeartPattern() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a number: ");
+        int a = sc.nextInt();
+
+        // Top part
+        for (int i = 1; i <= a / 2; i++) {
+            // Last row of top: completely filled
+            if (i == a / 2) {
+                for (int j = 1; j <= 2 * a - 1; j++) {
+                    System.out.print("*");
+                }
+            } else {
+                // Left spaces
+                for (int j = 1; j <= a / 2 - i; j++) {
+                    System.out.print(" ");
+                }
+                // Left stars
+                for (int j = 1; j <= 2 * i; j++) {
+                    System.out.print("*");
+                }
+                // Middle spaces
+                for (int j = 1; j <= a - 2 * i - 1; j++) {
+                    System.out.print(" ");
+                }
+                // Right stars
+                for (int j = 1; j <= 2 * i; j++) {
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+
+        // Bottom part (single loop, starts at a-1 to avoid repeating the full row)
+        for (int i = a - 1; i >= 1; i--) {
+            // Spaces
+            for (int j = 1; j <= a - i; j++) {
                 System.out.print(" ");
             }
-            for (j=1;j<=2*i-1;j++){
-
+            // Stars
+            for (int j = 1; j <= 2 * i - 1; j++) {
                 System.out.print("*");
             }
             System.out.println();
         }
-        for (i=2;i<=a;i++){
-            for (j=a-i;j>=1;j--){
-                System.out.print(" ");
-            }
-            for (j=1;j<=2*i-1;j++){
-              if  (i==1||i==a||j==2*i-1||j==1){
-                System.out.print("*");}
-
-              else {
-                System.out.print(" ");
-            }}
-            System.out.println();
-        }
-
-
     }
+
+    static void ArrayIO(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size: ");
+        int a = sc.nextInt();
+        int[] arr = new int[a];
+        for (int i = 0; i<=a-1; i++) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Entered array is: ");
+        for (int i=0; i<a;i++){
+            System.out.print(arr[i]+" ");
+        }
+        }
+    static void ArraySum(){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Enter array size: ");
+        int a = sc.nextInt(),i, sum = 0;
+        int[] arr = new int[a];
+        for (i=0 ; i<=a-1; i++){
+            arr[i]  =sc.nextInt();
+        }
+        System.out.println("Sum of entered array is: ");
+        for (i=0; i<a; i++){
+            sum = sum+ arr[i];
+        }
+        System.out.print(sum);
+    }
+
+    static void AverageArray(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter elements of array: ");
+        int a  = sc.nextInt(),i,sum = 0,average;
+        int[] arr = new int[a];
+        for (i=0; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        for (i=0; i<a; i++){
+            sum = sum+arr[i];
+        }
+        average = sum/a;
+        System.out.print("Average of array is: "+average);
+    }
+
+    static void LargestElement(){
+        Scanner sc = new Scanner(System.in);
+    }
+
 
 
     void main() {
