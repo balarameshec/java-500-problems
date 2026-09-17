@@ -94,6 +94,11 @@ public class Foundation {
         System.out.println("88. Array input and output");
         System.out.println("89. Sum of an array");
         System.out.println("90. Average of an array");
+        System.out.println("91. Largest of an array");
+        System.out.println("92. Smallest of an array");
+        System.out.println("93. Second largest of an array");
+        System.out.println("94. Second smallest of an array");
+        System.out.println("95. Reverse of an array");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -277,6 +282,16 @@ public class Foundation {
             ArraySum();
         } else if (choice == 90) {
             AverageArray();
+        } else if (choice == 91) {
+            LargestElement();
+        } else if (choice == 92) {
+            SmallestElement();
+        } else if (choice == 93) {
+            SecondLargest();
+        } else if (choice == 94) {
+            SecondSmallest();
+        } else if (choice == 95) {
+            ReverseArray();
         }
     }
 
@@ -2058,7 +2073,119 @@ public class Foundation {
 
     static void LargestElement(){
         Scanner sc = new Scanner(System.in);
+        System.out.println("Enter elements of array: ");
+        int a = sc.nextInt(),i,current,Largest;
+        int[] arr = new int[a];
+        for (i=0; i<=a-1;i++){
+            arr[i] = sc.nextInt();
+        }
+        Largest = arr[0];
+        for (i=0; i<a; i++){
+            current = arr[i];
+            if (current > Largest){
+                Largest = current;
+            }
+        }
+        System.out.print("Largest element in array is: "+Largest);
+
     }
+
+    static void SmallestElement(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements in an array: ");
+        int a = sc.nextInt(),i,current, smallest;
+        int[] arr = new int[a];
+        for (i = 0; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        smallest = arr[0];
+        for(i=0; i<a; i++){
+            current = arr[i];
+            if (current<smallest){
+                smallest = current;
+            }
+
+        }
+        System.out.print("Smallest element in an array: "+smallest);
+
+    }
+    static void SecondLargest(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements in an array: ");
+        int a = sc.nextInt(),i,current,largest, secondLargest = 0;
+        int[] arr = new int[a];
+        for (i=0 ; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        largest = arr[0];
+        secondLargest = arr[1];
+        if (largest > secondLargest){
+            int temp = largest;
+            largest = secondLargest;
+            secondLargest = temp;
+        }
+        for (i = 2;i<a; i++){
+            current = arr[i];
+            if (current>largest){
+                secondLargest  = largest;
+                largest = current;
+            }
+            else if (current>secondLargest){
+                secondLargest = current;
+            }
+        }
+        System.out.print("Second largest element in an array: "+secondLargest);
+    }
+
+    static void SecondSmallest(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements in an array: ");
+        int a = sc.nextInt(),i,current,smallest, secondSmallest ;
+        int[] arr = new int[a];
+        for (i=0 ; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        smallest = arr[0];
+        secondSmallest = arr[1];
+        if (smallest > secondSmallest){
+            int temp = smallest;
+            smallest = secondSmallest;
+            secondSmallest = temp;
+        }
+
+        for (i = 2;i<a; i++){
+            current = arr[i];
+            if (current<smallest){
+                secondSmallest  = smallest;
+                smallest = current;
+            }
+            else if (current<secondSmallest){
+                secondSmallest = current;
+            }
+        }
+        System.out.print("Second smallest element in an array: "+secondSmallest);
+    }
+
+    static void ReverseArray(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in array: ");
+        int a = sc.nextInt(),i,reverse;
+        int[] arr = new int[a];
+        for (i=0 ; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Entered array is: ");
+        for (i=0 ; i<a; i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Reversed array is: ");
+        for (i=a-1;i>=0;i--){
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    static void 
 
 
 
