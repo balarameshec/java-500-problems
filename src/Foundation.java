@@ -99,6 +99,11 @@ public class Foundation {
         System.out.println("93. Second largest of an array");
         System.out.println("94. Second smallest of an array");
         System.out.println("95. Reverse of an array");
+        System.out.println("96. Copy of an array");
+        System.out.println("97. Merge of array");
+        System.out.println("98. Linear search");
+        System.out.println("99. Binary search");
+        System.out.println("100. Bubble sort");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -292,6 +297,16 @@ public class Foundation {
             SecondSmallest();
         } else if (choice == 95) {
             ReverseArray();
+        } else if (choice == 96) {
+            CopyArray();
+        } else if (choice == 97) {
+            MergeArrays();
+        } else if (choice == 98) {
+            LinearSearch();
+        } else if (choice == 99) {
+            BinarySearch();
+        } else if (choice == 100) {
+            BubbleSort();
         }
     }
 
@@ -2185,7 +2200,181 @@ public class Foundation {
         }
     }
 
-    static void 
+    static void CopyArray(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in array: ");
+        int a = sc.nextInt(),i;
+        int[] arr = new int[a];
+
+        for (i=0 ; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Entered array is: ");
+        for (i=0 ; i<a; i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Copied array is: ");
+        int[] copy = new int[a];
+        for  (i=0 ; i<a; i++) {
+            copy[i] = arr[i] ;
+            System.out.print(copy[i] + " ");
+        }
+
+    }
+    static void MergeArrays(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements of array 1: ");
+        int a = sc.nextInt(),i;
+        System.out.println("Enter elements of array 1: ");
+        int[] arr1 = new int[a];
+
+        for (i=0;i<=a-1;i++){
+            arr1[i] = sc.nextInt();
+        }
+        System.out.println("Entered elements of array 1: ");
+        for (i=0; i<a; i++){
+            System.out.print(arr1[i]+ " ");
+        }
+        System.out.println();
+        System.out.println("Enter no of elements of array 2: ");
+        int b= sc.nextInt();
+        System.out.println("Enter elements of array 2: ");
+        int[] arr2 = new int[b];
+        for (i=0;i<=b-1;i++){
+            arr2[i] = sc.nextInt();
+        }
+        System.out.println("Entered elements of array 2: ");
+        for (i=0; i<b; i++){
+            System.out.print(arr2[i]+" ");
+        }
+        int c = a+b;
+        System.out.println();
+        int[] arr3 = new int[c];
+        System.out.println("Merged array: ");
+
+        for (i=0;i<a;i++){
+            arr3[i] = arr1[i];
+            System.out.print(arr3[i]+" ");
+        }
+        for (i=0;i<b;i++){
+            arr3[a+i] = arr2[i];
+            System.out.print(arr3[a+i]+" ");
+    }}
+
+    static void LinearSearch(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements in an array: ");
+        int a = sc.nextInt(),i;
+        System.out.println("Enter elements of array: ");
+        int[] arr = new int[a];
+        for (i=0;i<=a-1;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Enter element to be searched in an array: ");
+        int b = sc.nextInt();
+        boolean found = false;
+        for (i=0; i<a;i++){
+            if (b==arr[i]){
+                found  = true;
+            }}
+            if (found==true){
+                System.out.println("Entered element "+b+" is available in array");
+            }
+            else{
+                System.out.println("Entered element is not available in the given array");
+
+            }
+        System.out.println("Entered elements in an array: ");
+        for (i=0; i<a;i++){
+            System.out.print(arr[i]+" ");
+        }
+
+
+    }
+    static void BinarySearch(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements in an array: ");
+        int a = sc.nextInt(),i;
+        System.out.println("Enter elements of an array: ");
+        int[] arr = new int[a];
+        for(i=0; i<=a-1; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Enter element to be searched in an array: ");
+        int b = sc.nextInt(),low = 0, high = a-1, mid = (a-1)/2;
+        boolean found = false;
+        while (low <= high){
+            if (b==arr[mid]){
+                found = true;
+                break;
+            }
+            else if (b<arr[mid]){
+                    high  = mid-1;
+                    mid = (low+high)/2;
+                }
+                else if (b>arr[mid]){
+                    low = mid+1;
+                    mid = (low+high)/2;
+                }
+
+
+        }
+        if (found){
+            System.out.println("Entered element is found in array");
+        }
+        else {
+            System.out.println("Entered element is not found in array");
+        }
+    }
+
+    static void BubbleSort(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter no of elements in an array: ");
+        int a  = sc.nextInt(),i;
+        System.out.println("Enter elements of an array: ");
+        int[] arr = new int[a];
+        for (i=0;i<=a-1;i++){
+            arr[i] = sc.nextInt();
+        }
+        int pass=0, swap=0;
+        System.out.println("Sorted array: ");
+        while (pass<a-1){
+        for (i=0; i<=a-2; i++){
+        if(arr[i]>arr[i+1]){
+            swap = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = swap;
+        }
+            }
+            pass++;
+        }
+        for(i=0; i<=a-1;i++){
+        System.out.print(arr[i]+" ");
+    }}
+
+    static void SelectionSort(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i, swap = 0, pass=0, smallest =0;
+        System.out.println("Enter elements of the array: ");
+        int[] arr = new int[a];
+        for (i=0;i<=a-1;i++){
+            arr[i] = sc.nextInt();
+        }
+        while(pass<a-2){
+            for (i=0; i<=a-2; i++){
+                smallest = arr[i];
+                while(smallest>arr[a-1]){
+                   smallest = arr[i];
+                }
+            }
+            pass++;
+        }
+        for(i=0; i<=a-1;i++){
+            System.out.print(arr[i]+" ");}
+
+    }
 
 
 
