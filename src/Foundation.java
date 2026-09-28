@@ -112,6 +112,10 @@ public class Foundation {
         System.out.println("106. Array Rotation Right");
         System.out.println("107. Array Intersection");
         System.out.println("108. Array Union");
+        System.out.println("109. Prefix sum of an array");
+        System.out.println("110. Suffix sum of an array");
+        System.out.println("111. Maximum sub array");
+        System.out.println("112. Minimum sub array");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -331,6 +335,14 @@ public class Foundation {
             ArrayIntersection();
         } else if (choice == 108) {
             ArrayUnion();
+        } else if (choice == 109) {
+            PrefixSum();
+        } else if (choice == 110) {
+            SuffixSum();
+        } else if (choice == 111) {
+            MaximumSubarray();
+        } else if (choice == 112) {
+            MinimumSubarray();
         }
     }
 
@@ -2623,8 +2635,101 @@ public class Foundation {
         for (i=0;i<a;i++){
             arr[i] = sc.nextInt();
         }
+        System.out.println("Prefix sum of given array is: ");
+        for (i=0;i<a;i++){
+            if(i==0){
+            sum = arr[i];}
+            else if (i>0 && i<a){
+                sum = sum + arr[i];
+            }
+            System.out.print(sum+" ");
+        }
+    }
+
+    static void SuffixSum(){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,sum = 0;
+        System.out.println("Enter elements of an array: ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Suffix sum of an given array: ");
+        int [] suffix = new int[a];
+        for (i=a-1;i>=0;i--){
+                    sum = sum + arr[i];
+            suffix [i] = sum;
+            }
+        for (j=0;j<a;j++){
+            System.out.print(suffix [j]+" ");
+        }
+
+    }
+
+    static void MaximumSubarray(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements of an array: ");
+        int a = sc.nextInt(),i,j,sum,k,maxsum = 0;
+        System.out.println("Enter elements of ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Possible subarrays: ");
+        maxsum = arr[0];
+        for (i=0;i<a;i++){
+            for (j=i;j<a;j++){
+                sum = 0;
+                for (k=i;k<=j;k++){
+                    sum = sum+arr[k];
+                System.out.print(arr[k]+" ");
+                }
+                System.out.println();
+                System.out.print("Sum: "+sum);
+                System.out.println();
+                if (sum>maxsum){
+                    maxsum = sum;
+                }
+            }
+        }
+        System.out.println("Maximum sub array: "+maxsum);
+
+    }
+
+    static void MinimumSubarray(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements of an array: ");
+        int a = sc.nextInt(),i,j,sum,k,minsum = 0;
+        System.out.println("Enter elements of ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Possible subarrays: ");
+        minsum = arr[0];
+        for (i=0;i<a;i++){
+            for (j=i;j<a;j++){
+                sum = 0;
+                for (k=i;k<=j;k++){
+                    sum = sum+arr[k];
+                    System.out.print(arr[k]+" ");
+                }
+                System.out.println();
+                System.out.print("Sum: "+sum);
+                System.out.println();
+                if (sum<minsum){
+                    minsum = sum;
+                }
+            }
+        }
+        System.out.println("Minimum sub array: "+minsum);
+
+    }
+    static void TwoSum(){
         
     }
+
 
 
 
