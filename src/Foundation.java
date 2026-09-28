@@ -104,6 +104,14 @@ public class Foundation {
         System.out.println("98. Linear search");
         System.out.println("99. Binary search");
         System.out.println("100. Bubble sort");
+        System.out.println("101. Selection sort");
+        System.out.println("102. Insertion sort");
+        System.out.println("103. Count Frequency");
+        System.out.println("104. Remove Duplicates");
+        System.out.println("105. Array Rotation Left");
+        System.out.println("106. Array Rotation Right");
+        System.out.println("107. Array Intersection");
+        System.out.println("108. Array Union");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -307,6 +315,22 @@ public class Foundation {
             BinarySearch();
         } else if (choice == 100) {
             BubbleSort();
+        } else if (choice == 101) {
+            SelectionSort();
+        } else if (choice == 102) {
+            InsertionSort();
+        } else if (choice == 103) {
+            CountFrequency();
+        } else if (choice == 104) {
+            RemoveDuplicates();
+        } else if (choice == 105) {
+            ArrayRotationLeft();
+        } else if (choice == 106) {
+            ArrayRotationRight();
+        } else if (choice == 107) {
+            ArrayIntersection();
+        } else if (choice == 108) {
+            ArrayUnion();
         }
     }
 
@@ -2356,25 +2380,252 @@ public class Foundation {
     static void SelectionSort(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter number of elements in an array: ");
-        int a = sc.nextInt(),i, swap = 0, pass=0, smallest =0;
+        int a = sc.nextInt(),i, swap = 0, pass=0, smallest =0,j;
         System.out.println("Enter elements of the array: ");
         int[] arr = new int[a];
-        for (i=0;i<=a-1;i++){
+        for (i=0;i<a;i++){
             arr[i] = sc.nextInt();
         }
-        while(pass<a-2){
-            for (i=0; i<=a-2; i++){
-                smallest = arr[i];
-                while(smallest>arr[a-1]){
-                   smallest = arr[i];
+        while(pass<a-1){
+            smallest = pass;
+            for (j = pass+1; j<a; j++){
+                if(arr[smallest]>arr[j]){
+                   smallest = j;
                 }
             }
+            swap= arr[pass];
+            arr[pass]=arr[smallest];
+            arr[smallest] = swap;
             pass++;
         }
-        for(i=0; i<=a-1;i++){
+        System.out.println("Sorted array: ");
+        for(i=0; i<a;i++){
             System.out.print(arr[i]+" ");}
 
     }
+
+    static void InsertionSort(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in array: ");
+        int a = sc.nextInt(),i,j,key = 0;
+        System.out.println("Enter elements of the array: ");
+        int[] arr = new int[a];
+        for (i=0; i<a; i++){
+            arr[i] = sc.nextInt();
+        }
+
+        for (i=1;i<a;i++){
+            j= i-1;
+            key = arr[i];
+        while (j>=0 && arr[j]>key) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1]=key;
+
+        }
+        System.out.println("Sorted array: ");
+        for(i=0; i<a;i++){
+            System.out.print(arr[i]+" ");}
+
+    }
+
+    static void CountFrequency(){
+        Scanner sc  = new Scanner(System.in);
+        System.out.println("Enter number of elements in array: ");
+        int a = sc.nextInt(),i,j = 0,count=0,key = 0;
+        boolean seen  =false;
+        System.out.println("Enter elements of the array: ");
+        int[] arr = new int[a];
+        for (i=0; i<a; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Frequency of each elements in entered array: ");
+        for (i=0; i<a; i++){
+            seen  =false;
+            key = arr[i];
+            for (j=0; j<i; j++){
+            if (arr[j]==key){
+                seen = true;
+                break;
+            }
+        }
+        if (seen == false){
+            count=0;
+            j=0;
+        
+            while (j<a){
+                if (arr[j] == key) {
+                    count++;
+                }
+                j++;
+            }
+          
+                System.out.println(arr[i]+" - "+count+" times"); }
+        }}
+
+    static void RemoveDuplicates(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a  =sc.nextInt(),i,j,key=0;
+        System.out.println("Enter elements in the array: ");
+        boolean seen = false;
+        int [] arr = new int[a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Array without duplicates: ");
+        for (i=0;i<a;i++){
+            seen = false;
+            key = arr[i];
+            for (j=0;j<i;j++){
+                if (arr[j]==key){
+                    seen = true;
+                    break;
+                }
+            }
+            if (seen == false){
+                System.out.print(arr[i]+" ");
+            }
+        }
+
+    }
+
+    static void ArrayRotationLeft(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,key = 0;
+        System.out.println("Enter elements of an array: ");
+        int [] arr = new int[a];
+        for (i=0;i<a; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Left rotated array; ");
+        key = arr[0];
+        for (i=1; i<a; i++){
+            arr[i-1] = arr[i];
+        }
+        arr[a-1] = key;
+        for(i=0; i<a;i++){
+            System.out.print(arr[i]+" ");}
+    }
+
+    static void ArrayRotationRight(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,key=0;
+        System.out.println("Enter elements of an array: ");
+        int [] arr = new int [a];
+        for (i=0; i<a; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Right rotated array: ");
+        key = arr[a-1];
+        for (i=a-2; i>=0;i--){
+            arr[i+1] = arr[i];
+        }
+        arr[0] = key;
+        for(i=0; i<a; i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    static void ArrayIntersection(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in array 1: ");
+        int a = sc.nextInt(),i,j,key=0;
+        System.out.println("Enter elements of array 1: ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Enter number of elements in array 2: ");
+        int b = sc.nextInt();
+        System.out.println("Enter elements of array 2: ");
+        int [] arr1 = new int [b];
+        for (i=0;i<b;i++){
+            arr1[i] = sc.nextInt();
+        }
+        System.out.println("Intersection of both arrays: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<b;j++){
+                if (arr[i] == arr1[j]){
+                    System.out.print(arr[i]+" ");
+                }
+            }
+        }
+    }
+
+    static void ArrayUnion(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array 1: ");
+        int a = sc.nextInt(),i,j,key = 0;
+        boolean seen = false;
+        System.out.println("Enter elements of array 1: ");
+        int [] arr1 = new int [a];
+        for (i=0; i<a; i++){
+            arr1[i] = sc.nextInt();
+        }
+        System.out.println("Enter number of elements in an array 2: ");
+        int b = sc.nextInt();
+        System.out.println("Enter elements of array 2: ");
+        int [] arr2 = new int [b];
+        for (i=0;i<b;i++){
+            arr2[i] = sc.nextInt();
+        }
+        System.out.println("Entered elements of array 1: ");
+        for (i=0;i<a;i++){
+            System.out.print(arr1[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Entered elements of array 2: ");
+        for (i=0;i<b;i++){
+            System.out.print(arr2[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Union of both array: ");
+        int c = a+b;
+        int [] arr3 = new int[c];
+        for (i=0;i<a;i++){
+            arr3[i] = arr1[i];
+            seen = false;
+            key = arr3[i];
+            for (j=0;j<i;j++){
+                if (arr3[j]==key){
+                    seen = true;
+                    break;
+                }
+            }
+            if (seen == false){
+                System.out.print(arr3[i]+" ");
+        }}
+        for (i=0;i<b;i++){
+            arr3[a+i] = arr2[i];
+            seen = false;
+            key = arr3[a+i];
+            for (j=0;j<a+i;j++){
+                if (arr3[j]==key){
+                    seen = true;
+                    break;
+                }
+            }
+            if (seen == false){
+                System.out.print(arr3[a+i]+" ");
+        }}
+    }
+
+    static void PrefixSum(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a  = sc.nextInt(),i,sum = 0;
+        System.out.println("Enter elements of the array: ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        
+    }
+
 
 
 
