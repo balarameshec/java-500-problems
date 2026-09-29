@@ -116,6 +116,8 @@ public class Foundation {
         System.out.println("110. Suffix sum of an array");
         System.out.println("111. Maximum sub array");
         System.out.println("112. Minimum sub array");
+        System.out.println("113. Two sum array");
+        System.out.println("114. Three sum array");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -343,6 +345,10 @@ public class Foundation {
             MaximumSubarray();
         } else if (choice == 112) {
             MinimumSubarray();
+        } else if (choice == 113) {
+            TwoSum();
+        } else if (choice == 114) {
+            ThreeSum();
         }
     }
 
@@ -2727,11 +2733,69 @@ public class Foundation {
 
     }
     static void TwoSum(){
-        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i = 0,j = 0,sum;
+        boolean found = false;
+        System.out.println("Enter a target element: ");
+        int target = sc.nextInt();
+        System.out.println("Enter elements of the array: ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        for (i=0;i<a;i++){
+            sum = 0;
+            for (j=i+1;j<a;j++){
+                sum = arr[i] + arr[j];
+                if (sum == target){
+                    found = true;
+                    System.out.println("Two sum of entered array is: "+arr[i]+" "+arr[j]);
+                }
+
+                }
+            }
+        if (found != true){
+            System.out.println("There is no two sum for given array");
+        }
     }
 
+    static void ThreeSum(){
+        Scanner sc  =  new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a  = sc.nextInt(),i,j,k, sum;
+        boolean found = false;
+        System.out.println("Enter target element: ");
+        int target =  sc.nextInt();
+        int [] arr = new int [a];
+        System.out.println("Enter elements in an array: ");
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        for (i=0;i<a;i++){
+            sum = 0;
+            for (j=i+1;j<a;j++){
+                for (k=j+1;k<a;k++){
+                    sum = arr[i]+arr[j]+arr[k];
+                    if (sum == target){
+                        found = true;
+                        System.out.println("Three sum of given array: "+arr[i]+" "+arr[j]+" "+arr[k]);
+                    }
+                }
+            }
+            }
+        if (found == false){
+            System.out.println("There is no three sum for given array");
+        }
+    }
 
-
+    static void MoveZero(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in array: ");
+        int a = sc.nextInt(),i,j,key;
+        System.out.println("Enter elements in an array: ");
+        
+    }
 
 
     void main() {
