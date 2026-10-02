@@ -6,7 +6,7 @@ public class Foundation {
         System.out.println("Choose an operation: ");
         System.out.println("1. Hello");
         System.out.println("2. Print name");
-        System.out.println("3. Arithemetic operation");
+        System.out.println("3. Arithmetic operation");
         System.out.println("4. Swap numbers");
         System.out.println("5. Check Even or Odd");
         System.out.println("6. Check Positive or Negative");
@@ -118,6 +118,9 @@ public class Foundation {
         System.out.println("112. Minimum sub array");
         System.out.println("113. Two sum array");
         System.out.println("114. Three sum array");
+        System.out.println("115. Move Zeros");
+        System.out.println("116. Missing Numbers");
+        System.out.println("117. Finding Duplicates");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -349,6 +352,12 @@ public class Foundation {
             TwoSum();
         } else if (choice == 114) {
             ThreeSum();
+        } else if (choice == 115) {
+            MoveZero();
+        } else if (choice == 116) {
+            MissingNumber();
+        } else if (choice == 117) {
+            DuplicateElements();
         }
     }
 
@@ -2792,9 +2801,118 @@ public class Foundation {
     static void MoveZero(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter number of elements in array: ");
-        int a = sc.nextInt(),i,j,key;
+        int a = sc.nextInt(),i,j,key=0,last = a - 1;
         System.out.println("Enter elements in an array: ");
-        
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Entered elements in the array: ");
+        for (i=0;i<a;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Zero moved elements in the array: ");
+        for (i=0;i<last;i++){
+            if (arr[i]==0 ){
+                key = arr[i];
+                for (j=i; j<last; j++){
+                    arr[j] = arr[j+1];
+                }
+                arr[last] = key;
+                last--;
+                i--;
+            }
+        }
+        for (j=0;j<a;j++) {
+
+            System.out.print(arr[j] + " ");
+        }
+    }
+
+    static void MissingNumber(){
+        Scanner sc  = new Scanner(System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a = sc.nextInt(),i,j,key = 0;
+        System.out.println("Enter elements in an array: ");
+        int [] arr = new int [a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Elements of entered array: ");
+        for (i=0;i<a;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Enter maximum number of elements: ");
+        int b = sc.nextInt();
+        int [] arr1 = new int [b];
+        System.out.println("Elements of array 2: ");
+        for (i=0;i<b;i++){
+            arr1[i] = i;
+            System.out.print(arr1[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Missing elements of the array: ");
+        for (j=0;j<b;j++){
+            key = 0;
+            for (i=0;i<a;i++){
+                if (arr1[j]==arr[i]){
+                   key=1;
+                   break;
+                }
+            }
+            if (key ==0){
+                System.out.print(arr1[j]+" ");
+            }
+        }
+
+    }
+    static void DuplicateElements(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,key=0;
+        System.out.println("Enter elements in an array: ");
+        boolean seen = false;
+        int [] arr = new int[a];
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Duplicate elements in the array: ");
+        for (i=0;i<a;i++){
+            seen = false;
+            key = arr[i];
+            for (j=0;j<i;j++){
+                if(arr[j]==key){
+                    seen = true;
+                    break;
+                }
+            }
+            if (seen == true){
+                System.out.print(arr[i]+" ");
+            }
+        }
+
+    }
+    static void MaximumSlidingWindow(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,key=0, sum = 0,current, previous, next;
+        int [] arr = new int [a];
+        System.out.println("Enter elements in an array: ");
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Enter size of the slide: ");
+        int b = sc.nextInt();
+        for (i=0;i<b;i++){
+            for (j=0;j<a;j++){
+            current = i;
+           if (current == 1){
+               previous = i-1;
+               next = i+1;
+           }}
+        }
     }
 
 
