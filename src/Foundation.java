@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import static java.lang.Math.min;
+
 public class Foundation {
     public void main(String[] args) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
@@ -121,6 +123,12 @@ public class Foundation {
         System.out.println("115. Move Zeros");
         System.out.println("116. Missing Numbers");
         System.out.println("117. Finding Duplicates");
+        System.out.println("118. Sliding Window Sum");
+        System.out.println("119. Sliding window sum");
+        System.out.println("120. Sliding window maximum");
+        System.out.println("121. K Largest and K Smallest");
+        System.out.println("122. Product Except Self");
+        System.out.println("123. Trapping Rain Water");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -358,6 +366,18 @@ public class Foundation {
             MissingNumber();
         } else if (choice == 117) {
             DuplicateElements();
+        } else if (choice == 118) {
+            SlidingWindowSum();
+        } else if (choice == 119) {
+            SlidingWindowMaximum();
+        } else if (choice == 120) {
+            SlidingWindowMaximum();
+        } else if (choice == 121) {
+            KLargestAndSmallest();
+        } else if (choice == 122) {
+            ProductExceptSelf();
+        } else if (choice == 123) {
+            TrappingRainWater();
         }
     }
 
@@ -2894,25 +2914,165 @@ public class Foundation {
         }
 
     }
-    static void MaximumSlidingWindow(){
+    static void SlidingWindowSum(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter number of elements in an array: ");
-        int a = sc.nextInt(),i,j,key=0, sum = 0,current, previous, next;
+        int a = sc.nextInt(),i,j,max=0, sum = 0,maxStart = 0;
         int [] arr = new int [a];
+        System.out.println("Enter size of the slide: ");
+        int b = sc.nextInt();
+        if (a>=b) {
+            System.out.println("Enter elements in an array: ");
+            for (i = 0; i < a; i++) {
+                arr[i] = sc.nextInt();
+            }
+
+            for (i = 0; i <= a - b; i++) {
+                sum = 0;
+                for (j = i; j <= i + b - 1; j++) {
+                    sum = sum + arr[j];
+                }
+                if (i == 0) {
+                    max = sum;
+                    maxStart = i;
+                } else if (sum > max) {
+                    max = sum;
+                    maxStart = i;
+                }
+
+                // System.out.println(arr[j]+" ");
+            }
+            System.out.println("Sliding window:");
+            for (int k = maxStart; k<=maxStart+b-1; k++){
+                System.out.print(arr[k]+" ");
+            }
+            System.out.println();
+            System.out.println("Sliding window sum: " + max);
+        }
+        else{
+            System.out.println("Size of slide should be smaller than size of array");
+        }
+
+    }
+    static void SlidingWindowMaximum() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a = sc.nextInt(), i, j, max = 0, maxStart = 0;
+        System.out.println("Enter the size of the slide: ");
+        int b = sc.nextInt();
+        int[] arr = new int[a];
         System.out.println("Enter elements in an array: ");
+        if (a>=b){
+        for (i = 0; i < a; i++) {
+            arr[i] = sc.nextInt();
+        }
+        for (i = 0; i <= a - b; i++) {
+            max = arr[i];
+            for (j = i; j <= i + b - 1; j++) {
+                if (max < arr[j]) {
+                    max = arr[j];
+                    maxStart = i;
+                }
+            }
+        }
+        System.out.println("Sliding Window: ");
+        for (int k = maxStart; k <= maxStart + b - 1; k++) {
+            System.out.print(arr[k] + " ");
+        }
+        System.out.println();
+        System.out.println("Sliding window max: " + max);
+    }
+      else{
+        System.out.println("Size of slide should be smaller than size of array");
+    }
+    }
+    static void KLargestAndSmallest(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in the array: ");
+        int a = sc.nextInt(),i,j,pass = 0,swap = 0;
+        int [] arr = new int [a];
+        System.out.println("Enter the size of the slide: ");
+        int b = sc.nextInt();
+        System.out.println("Enter the elements in an array: ");
         for (i=0;i<a;i++){
             arr[i] = sc.nextInt();
         }
-        System.out.println("Enter size of the slide: ");
-        int b = sc.nextInt();
-        for (i=0;i<b;i++){
-            for (j=0;j<a;j++){
-            current = i;
-           if (current == 1){
-               previous = i-1;
-               next = i+1;
-           }}
+        while (pass<a-1){
+            for (i=0;i<=a-2;i++){
+                if (arr[i]>arr[i+1]){
+                    swap = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = swap;
+                }
+            }
+            pass++;
         }
+        System.out.println("Sorted array: ");
+        for (i=0;i<a;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.print("K Smallest: ");
+        for ( i = 0; i<=b-1; i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.print("K Largest: ");
+        for (i = a-b; i<=a-1;i++){
+            System.out.print(arr[i]+" ");
+        }
+
+    }
+
+    static void ProductExceptSelf(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,product;
+        int [] arr = new int [a];
+        System.out.println("Enter each elements in the array: ");
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        for (i=0;i<a;i++){
+            product = 1;
+            for (j=0;j<a;j++){
+                if (j!=i){
+                    product  = product * arr[j];
+
+                }
+            }
+            System.out.println("Index "+arr[i]+" Product "+product);
+        }
+    }
+
+    static void TrappingRainWater(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a = sc.nextInt(),i,j,leftmax = 0, rightmax = 0,totalWaterTrapped = 0,waterlevel,waterAtCurrent;
+        int [] arr = new int [a];
+        System.out.println("Enter each elements in an array: ");
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        for (i=0;i<a;i++){
+            leftmax = arr[0];
+            for (j=0;j<i;j++){
+                if (arr[j]>leftmax){
+                    leftmax = arr[j];
+                }
+            }
+            rightmax = arr[a-1];
+            for (j=a-1;j>i;j--){
+                if (arr[j]>rightmax){
+                    rightmax = arr[j];
+                }
+            }
+            waterlevel = Math.min(leftmax,rightmax);
+            waterAtCurrent = waterlevel - arr[i];
+            if (waterAtCurrent>0){
+            totalWaterTrapped = totalWaterTrapped+waterAtCurrent;}
+        }
+        System.out.println("Total water trapped: "+totalWaterTrapped);
     }
 
 
