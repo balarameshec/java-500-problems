@@ -129,6 +129,11 @@ public class Foundation {
         System.out.println("121. K Largest and K Smallest");
         System.out.println("122. Product Except Self");
         System.out.println("123. Trapping Rain Water");
+        System.out.println("124. Container with most water");
+        System.out.println("125. Majority element");
+        System.out.println("126. Merge Intervals");
+        System.out.println("127. Stock buy and sell");
+        System.out.println("128. Subarray Sum Equals K");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -378,6 +383,16 @@ public class Foundation {
             ProductExceptSelf();
         } else if (choice == 123) {
             TrappingRainWater();
+        } else if (choice == 124) {
+            ContainerWithMostWater();
+        } else if (choice == 125) {
+            MajorityElement();
+        } else if (choice == 126) {
+            MergeIntervals();
+        } else if (choice == 127) {
+            StockBuySell();
+        } else if (choice == 128) {
+            SubarraySumEqualsK();
         }
     }
 
@@ -3067,12 +3082,153 @@ public class Foundation {
                     rightmax = arr[j];
                 }
             }
-            waterlevel = Math.min(leftmax,rightmax);
+            waterlevel = min(leftmax,rightmax);
             waterAtCurrent = waterlevel - arr[i];
             if (waterAtCurrent>0){
             totalWaterTrapped = totalWaterTrapped+waterAtCurrent;}
         }
         System.out.println("Total water trapped: "+totalWaterTrapped);
+    }
+
+    static void ContainerWithMostWater(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a  = sc.nextInt(),i,j = 0,area = 0, shorterWall, distance = 0, areaMax = 0;
+        int [] arr = new int [a];
+        int distanceMax =0, Imax = 0,Jmax = 0;
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            arr [i] = sc.nextInt();
+        }
+        for (i=0;i<a;i++){
+            for (j=i+1;j<a;j++){
+                shorterWall = min(arr[i],arr[j]);
+                distance = j-i;
+                area = shorterWall * distance;
+                if (areaMax < area){
+                    areaMax = area;
+                    Imax = i;
+                    Jmax = j;
+                }
+                if (distanceMax < distance){
+                    distanceMax = distance;
+                }
+            }
+        }
+        System.out.print("Container with most area: "+areaMax);
+        System.out.println();
+        System.out.print("Container with most distance: "+distanceMax);
+        System.out.println();
+        System.out.print("Value of i: "+Imax);
+        System.out.println();
+        System.out.print("Value of j: "+Jmax);
+    }
+
+    static void MajorityElement(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a = sc.nextInt(),i,j,count = 0,b=a/2,Imax = 0;
+        int [] arr= new int[a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            arr [i] = sc.nextInt();
+        }
+        for (i=0;i<a;i++){
+            count = 0;
+            for (j=0;j<a;j++){
+                if (arr[i]==arr[j]){
+                    count++;
+                    if (count>b){
+                    Imax = arr[i];}
+                }
+            }
+        }
+        if (count>b){
+            System.out.print(Imax+" is the majority element in the array");
+            System.out.println();
+        }
+        else {
+            System.out.print("No major element in this array");
+        }
+    }
+
+    static void MergeIntervals(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of rows: ");
+        int rows = sc.nextInt(),i,j;
+        System.out.println("Enter number of columns: ");
+        int columns = sc.nextInt();
+        int [][] arr = new int [rows][columns];
+        System.out.println("Enter elements in array: ");
+        for (i=0;i<rows;i++){
+            System.out.print("Enter interval [" + (i + 1) + "]: ");
+            for(j=0;j<columns;j++){
+            arr[i][j] = sc.nextInt();
+        }}
+        for (i=0;i<rows-1;i++){
+            System.out.println();
+            if(arr[i + 1][0] <= arr[i][1]){
+                arr[i][1] = arr[i + 1][1];
+            System.out.print("Output interval [" + (i + 1) + "]: ");
+            for(j=0;j<columns;j++){
+                System.out.print(arr[i][j]+" ");
+            }}
+        }
+    }
+
+    static void StockBuySell(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j, Imin, difference = 0;
+        int buyIndex = 0, bestBuyIndex = 0, bestSellIndex = 0;
+        int [] arr = new int [a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            arr [i] = sc.nextInt();
+        }
+        Imin = arr[0];
+        System.out.println("Best time to buy and sell stocks:");
+        for (i=1;i<a;i++){
+            if (arr[i] < Imin) {
+                Imin = arr[i];
+                buyIndex = i;
+            } else if (arr[i] - Imin > difference) {
+                difference = arr[i] - Imin;
+                bestBuyIndex = buyIndex;
+                bestSellIndex = i;
+            }
+        }
+        System.out.println("Buy at "+arr[bestBuyIndex]+" and sell at "+arr[bestSellIndex]
+                +" to get a profit of "+difference);
+    }
+
+    static void SubarraySumEqualsK(){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a = sc.nextInt(),i,j,sum = 0;
+        int [] arr = new int [a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Enter the value of K: ");
+        int b = sc.nextInt(),count = 0;
+        System.out.println("List the all possible subarrays: ");
+        for (i=0;i<a;i++){
+            sum = 0;
+            for (j=i;j<a;j++){
+                sum = sum+arr[j];
+                if(sum ==b){
+                    count++;
+                    for (int k = i; k <= j; k++) {
+                        System.out.print(arr[k] + " ");
+                    }
+                    System.out.println();
+                }
+            }
+        }
+        System.out.println("Number of subarrays that matches K is "+count);
+
     }
 
 
