@@ -134,6 +134,20 @@ public class Foundation {
         System.out.println("126. Merge Intervals");
         System.out.println("127. Stock buy and sell");
         System.out.println("128. Subarray Sum Equals K");
+        System.out.println("129. Longest Consecutive Sequence");
+        System.out.println("130. Rotate Matrix");
+        System.out.println("131. Spiral Matrix");
+        System.out.println("132. Spiral Matrix V2");
+        System.out.println("133. Matrix Transpose");
+        System.out.println("134. Matrix Multiplication");
+        System.out.println("135. Matrix Diagonal Sum");
+        System.out.println("136. Matrix boundary traversal");
+        System.out.println("137. Matrix Search");
+        System.out.println("138. Matrix Rotation");
+        System.out.println("139. String length");
+        System.out.println("140. Reverse string ");
+        System.out.println("141. Palindrome String");
+        System.out.println("142. Count vowels and consonants in a string");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -393,6 +407,34 @@ public class Foundation {
             StockBuySell();
         } else if (choice == 128) {
             SubarraySumEqualsK();
+        } else if (choice == 129) {
+            LongestConsecutiveSequence();
+        } else if (choice == 130) {
+            RotateMatrix();
+        } else if (choice == 131) {
+            SpiralMatrix();
+        } else if (choice == 132) {
+            SpiralMatrixV2();
+        } else if (choice == 133) {
+            MatrixTranspose();
+        } else if (choice == 134) {
+            MatrixMultiplication();
+        } else if (choice == 135) {
+            MatrixDiagonalSum();
+        } else if (choice == 136) {
+            MatrixBoundaryTraversal();
+        } else if (choice == 137) {
+            MatrixSearch();
+        } else if (choice == 138) {
+            MatrixRotation();
+        } else if (choice == 139) {
+            StringLength();
+        } else if (choice == 140) {
+            ReverseString();
+        } else if (choice == 141) {
+            PalindromeString();
+        } else if (choice == 142) {
+            CountVowelsAndConsonants();
         }
     }
 
@@ -3230,6 +3272,508 @@ public class Foundation {
         System.out.println("Number of subarrays that matches K is "+count);
 
     }
+
+    static void LongestConsecutiveSequence(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,length =1,maxLength = 0,maxStart = 0;
+        int  [] arr = new int[a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Longest consecutive sequence: ");
+        for (i=0;i<a;i++){
+            int current = arr[i];
+            length = 1;
+            for (j=0;j<a;j++){
+                if (arr[j] == current+1){
+                    length++;
+                    current++;
+                    if (length>maxLength){
+                        maxLength = length;
+                        maxStart = arr[i];
+                    }
+                }
+            }
+        }
+        for (int k = maxStart;k<maxStart+maxLength;k++ ){
+            System.out.print(k+" ");
+        }
+        System.out.println();
+        System.out.println("Longest consecutive sequence elements: "+maxLength);
+    }
+
+    static void RotateMatrix(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the matrix: ");
+        int a = sc.nextInt(),i,j;
+        int [][] arr = new int [a][a];
+        int [][] rotated = new int [a][a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Output: ");
+        for (i=0;i<a;i++){
+            System.out.println();
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+"  ");
+            }
+        }
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                rotated[j][a - 1 - i] = arr[i][j];
+            }
+        }
+        System.out.println();
+        System.out.println("Output Rotate 90': ");
+        for (i=0;i<a;i++){
+            System.out.println();
+            for (j=0;j<a;j++){
+                System.out.print(rotated[i][j] +"  ");
+            }
+        }
+    }
+
+    static void SpiralMatrix() throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements in an array: ");
+        int a = sc.nextInt(), i, j, top = 0, left = 0, bottom = a - 1, right = a - 1;
+        int[][] arr = new int[a][a];
+        boolean [][] shown =new boolean[a][a];
+        System.out.println("Enter each element in matrix: ");
+        for (i = 0; i < a; i++) {
+            for (j = 0; j < a; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entered Input: ");
+        for (i = 0; i < a; i++) {
+            System.out.println();
+            for (j = 0; j < a; j++) {
+                System.out.print(arr[i][j] + "  ");
+            }
+        }
+        System.out.println();
+        System.out.println("Output: ");
+        while (top <= bottom && left <= right) {
+            for (j = left; j <= right; j++) {
+                shown[top][j]= true;
+                for (int r = 0; r < a; r++) {
+                    for (int c = 0; c < a; c++) {
+                        if (shown[r][c]) {
+                            System.out.print(arr[r][c] + "\t");
+                        } else {
+                            System.out.print(" \t");
+                        }
+                    }
+                    System.out.println();
+                }
+                System.out.flush();
+                Thread.sleep(1000);
+            }
+            top++;
+            for (i = top; i <= bottom; i++) {
+                shown[i][right]=true;
+                for (int r = 0; r < a; r++) {
+                    for (int c = 0; c < a; c++) {
+                        if (shown[r][c]) {
+                            System.out.print(arr[r][c] + "\t");
+                        } else {
+                            System.out.print(" \t");
+                        }
+                    }
+                    System.out.println();
+                }
+                System.out.flush();
+                Thread.sleep(1000);
+            }
+            right--;
+            if (top<=bottom){
+            for (j = right; j >= left; j--) {
+                shown[bottom][j]=true;
+                for (int r = 0; r < a; r++) {
+                    for (int c = 0; c < a; c++) {
+                        if (shown[r][c]) {
+                            System.out.print(arr[r][c] + "\t");
+                        } else {
+                            System.out.print(" \t");
+                        }
+                    }
+                    System.out.println();
+                }
+                System.out.flush();
+                Thread.sleep(1000);
+            }}
+            bottom--;
+            if (left <= right){
+            for (i = bottom; i >= top; i--){
+                shown[i][left]=true;
+                for (int r = 0; r < a; r++) {
+                    for (int c = 0; c < a; c++) {
+                        if (shown[r][c]) {
+                            System.out.print(arr[r][c] + "\t");
+                        } else {
+                            System.out.print(" \t");
+                        }
+                    }
+                    System.out.println();
+                }
+                System.out.flush();
+                Thread.sleep(1000);
+        }}
+            left++;
+            System.out.println();
+            Thread.sleep(1000);
+    }
+    }
+
+    public static void SpiralMatrixV2() throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter value of n in n x n matrix: ");
+        int a = sc.nextInt(), i, j, top = 0, left = 0, right = a - 1, bottom = a - 1;
+        int[][] arr = new int[a][a];
+        boolean[][] shown = new boolean[a][a];
+        System.out.println("Enter each elements in an array: ");
+        for (i = 0; i < a; i++) {
+            for (j = 0; j < a; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println();
+        System.out.println("Output: ");
+        while (top <= bottom && left <= right) {
+            for (i = left; i <= right; i++) {
+                shown[top][i] = true;
+                printMatrix(arr, shown, a);
+            }
+            top++;
+            for (i = top; i <= bottom; i++) {
+                shown[i][right] = true;
+                printMatrix(arr, shown, a);
+            }
+            right--;
+            if (top <= bottom) {
+                for (i = right; i >= left; i--) {
+                    shown[bottom][i] = true;
+                    printMatrix(arr, shown, a);
+                }
+                bottom--;
+            }
+            if (left <= right) {
+                for (j = bottom; j >= top; j--) {
+                    shown[j][left] = true;
+                    printMatrix(arr, shown, a);
+                }
+                left++;
+            }
+            System.out.println();
+            Thread.sleep(1000);
+        }
+        sc.close();
+
+    }
+    private static void printMatrix(int[][] arr, boolean[][] shown, int a) throws InterruptedException {
+        for (int r = 0; r < a; r++) {
+            for (int c = 0; c < a; c++) {
+                if (shown[r][c]) {
+                    System.out.print(arr[r][c] + "\t");
+                } else {
+                    System.out.print(" \t");
+                }
+            }
+            System.out.println();
+        }
+        System.out.flush();
+        Thread.sleep(1000);
+    }
+
+    static void MatrixTranspose(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter value of n in nxn matrix: ");
+        int a = sc.nextInt(),i,j;
+        int [][] arr = new int[a][a];
+        System.out.println("Enter each element in an matrix: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entered input: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println("Transpose of entered matrix: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[j][i]+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void MatrixMultiplication(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the value of n in nxn matrix: ");
+        int a = sc.nextInt(),i,j,k;
+        int [][] arr = new int [a][a];
+        int [][] arr1 = new int [a][a];
+        int [][] result = new int [a][a];
+        System.out.println("Enter the value of matrix 1: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Enter the value of matrix 2: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr1[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entered matrix 1:");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("Entered matrix 2:");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr1[i][j]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("Multiplication of matrix 1 and 2: ");
+        for (i=0;i<a;i++){
+            for(j=0;j<a;j++){
+                for (k=0;k<a;k++){
+                    result[i][j] += arr[i][k] * arr1[k][j];
+                }
+                System.out.print(result[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void MatrixDiagonalSum(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the value of n in nxn array: ");
+        int a = sc.nextInt(),i,j = 0,sum = 0;
+        int [][] arr = new int [a][a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entered matrix: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("Sum of diagonal in a matrix: ");
+            for (i=0;i<a;i++){
+                        sum += arr[i][i];
+                    }
+            System.out.println("Sum of diagonal one: "+sum);
+            sum = 0;
+            for (i=0;i<a;i++){
+                sum += arr[i][a-1-i];
+            }
+        System.out.println("Sum of diagonal two: "+sum);
+    }
+
+    static void MatrixBoundaryTraversal(){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Enter value of n in nxn matrix: ");
+        int a  =sc.nextInt(),i,j,top = 0,left = 0,right = a-1,bottom = a-1;
+        int [][] arr = new int[a][a];
+        System.out.println("Enter each element in a matrix");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entered Input: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Output: ");
+        for (j=left;j<=right;j++){
+            System.out.print(arr[top][j]+" ");
+        }
+
+        for (i=top+1; i<=bottom; i++){
+            System.out.print(arr[i][right]+" ");
+        }
+
+        if (top<bottom){
+        for (j=right-1; j>=left;j--){
+            System.out.print(arr[bottom][j]+" ");
+        }
+        }
+
+        if (left<right){
+            for (i = bottom-1; i>top;i--){
+                System.out.print(arr[i][left]+" ");
+            }
+        }
+    }
+
+    static void MatrixSearch(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter value of n in nxn matrix: ");
+        int a = sc.nextInt(),i,j;
+        boolean available = false;
+        int [][] arr = new int [a][a];
+        System.out.println("Enter element to be searched: ");
+        int b = sc.nextInt();
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Input array: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                if (b==arr[i][j]){
+                    available = true;
+                }
+            }
+        }
+        if (available){
+            System.out.println("Entered element is available in matrix");
+        }
+        else{
+            System.out.println("Entered element is not available in matrix");
+        }
+    }
+
+    static void MatrixRotation(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter value of n in nxn matrix: ");
+        int a = sc.nextInt(),i,j;
+        int [][] arr = new int [a][a];
+        System.out.println("Enter each element in an array: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                arr[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entered Input: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("Transpose of entered matrix: ");
+        for (i=0;i<a;i++){
+            for (j=0;j<a;j++){
+                System.out.print(arr[j][i]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("Rotation of given matrix: ");
+        for (i=0;i<a;i++){
+            for (j=a-1;j>=0;j--){
+                System.out.print(arr[j][i]+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void StringLength(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter value of string: ");
+        String str = sc.next();
+        System.out.println("Length of entered string "+str+" is "+str.length());
+    }
+
+    static void ReverseString(){
+        Scanner sc  = new Scanner(System.in);
+        int i;
+        System.out.println("Enter the value of string: ");
+        String str = sc.next();
+        System.out.print("Reverse of entered string: ");
+        for (i=str.length()-1;i>=0;i--) {
+            System.out.print(str.charAt(i));
+        }
+    }
+
+    static void PalindromeString(){
+        Scanner sc = new Scanner (System.in);
+        int i;
+        System.out.println("Enter the input of string: ");
+        String str = sc.next(), reversed = "";
+        System.out.println("Entered string: "+str);
+        for (i = str.length()-1; i>=0; i--){
+            reversed = reversed+str.charAt(i);
+        }
+        if (str.equals(reversed)){
+            System.out.println("It's a palindrome string");
+        }
+        else {
+            System.out.println("T's not a palindrome string");
+        }
+    }
+
+    static void CountVowelsAndConsonants(){
+        Scanner sc = new Scanner(System.in);
+        int count = 0,i,consonantCount=0;
+        System.out.println("Enter the input string: ");
+        String str = sc.next();
+        str = str.toLowerCase();
+        for (i = 0; i<str.length(); i++){
+            if ((str.charAt(i)=='a')||(str.charAt(i)=='e')
+                    ||(str.charAt(i)=='i')||(str.charAt(i)=='o')||(str.charAt(i)=='u')){
+                count++;
+            }
+            else if(Character.isLetter(str.charAt(i))) {
+                consonantCount++;
+            }
+        }
+        if (count>0){
+            System.out.println("Number of vowels in entered string: "+count);
+        }
+        else{
+            System.out.println("There are no vowels in entered string");
+        }
+        if (consonantCount>0){
+            System.out.println("Number of consonants in given string: "+consonantCount);
+        }
+        else{
+            System.out.println("There are no consonants in entered string");
+        }
+    }
+
+    static void CountWords(){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Enter ")
+    }
+
 
 
     void main() {
