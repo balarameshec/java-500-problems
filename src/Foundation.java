@@ -148,6 +148,16 @@ public class Foundation {
         System.out.println("140. Reverse string ");
         System.out.println("141. Palindrome String");
         System.out.println("142. Count vowels and consonants in a string");
+        System.out.println("143. Count spaces in a line");
+        System.out.println("144. Count digits and special case");
+        System.out.println("145. Upper, lower and toggle cases");
+        System.out.println("146. Remove Spaces");
+        System.out.println("147. Replace Character And Character Frequency");
+        System.out.println("148. First Repeated And Non Repeated Character");
+        System.out.println("149. Remove duplicate characters");
+        System.out.println("150. Check anagram");
+        System.out.println("151. String compression and expansion");
+        System.out.println("152. Longest and shortest word");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -435,6 +445,26 @@ public class Foundation {
             PalindromeString();
         } else if (choice == 142) {
             CountVowelsAndConsonants();
+        } else if (choice == 143) {
+            CountWords();
+        } else if (choice == 144) {
+            CountDigitsAndSpecialChar();
+        } else if (choice == 145) {
+            LowerAndUpperCase();
+        } else if (choice == 146) {
+            RemoveSpaces();
+        } else if (choice == 147) {
+            ReplaceCharacterAndCharacterFrequency();
+        } else if (choice == 148) {
+            FirstRepeatedAndNonRepeatedCharacter();
+        } else if (choice == 149) {
+            RemoveDuplicateChar();
+        } else if (choice == 150) {
+            CheckAnagram();
+        } else if (choice == 151) {
+            StringCompressionAndExpansion();
+        } else if (choice == 152) {
+            LongestAndShortestWord();
         }
     }
 
@@ -3771,8 +3801,260 @@ public class Foundation {
 
     static void CountWords(){
         Scanner sc = new Scanner (System.in);
-        System.out.println("Enter ")
+        System.out.println("Enter the input string: ");
+        int i, count = 0;
+        String str = sc.nextLine();
+        for (i=0;i<str.length();i++){
+        if (str.charAt(i)==' '){
+            count++;
+        }}
+        System.out.println("Number of spaces in entered line is "+count);
+        System.out.println("Number of words in entered line is "+(count+1));
     }
+
+    static void CountDigitsAndSpecialChar(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter input string: ");
+        int i, count = 0, splChar=0;
+        String str = sc.nextLine();
+        for (i=0;i<str.length();i++){
+            if (Character.isDigit(str.charAt(i))){
+                count++;
+            }
+            if ((!Character.isDigit(str.charAt(i)))&&(!Character.isLetter(str.charAt(i)))&&
+            (str.charAt(i)!=' ')){
+                splChar++;
+            }
+        }
+        System.out.println("Number of digits in given line is: "+count);
+        System.out.println("Number of Special characters in given line is: "+splChar);
+    }
+
+    static void LowerAndUpperCase(){
+        Scanner sc  =new Scanner(System.in);
+        System.out.println("Enter input string: ");
+        int i;
+        String str = sc.nextLine(), result ="";
+        for (i=0; i<str.length();i++){
+            if (Character.isLowerCase(str.charAt(i))){
+
+                result = result + Character.toUpperCase(str.charAt(i));
+            }
+            else if (Character.isUpperCase(str.charAt(i))){
+
+                result = result + Character.toLowerCase(str.charAt(i));
+            }
+            else{
+                result = result + ' ';
+            }
+        }
+        System.out.println("Toggle case: "+result);
+        System.out.println("Uppercase: "+str.toUpperCase());
+        System.out.println("Lowercase: "+str.toLowerCase());
+    }
+
+    static void RemoveSpaces(){
+        Scanner sc = new Scanner(System.in);
+        int i,count = 0;
+        System.out.println("Enter input string: ");
+        String str = sc.nextLine(), result = "";
+        for (i=0;i<str.length();i++){
+            if(str.charAt(i)==' '){
+               count++;
+            }
+            if(str.charAt(i)!=' ') {
+                result = result + str.charAt(i);
+            }
+        }
+        System.out.println("Number of spaces: "+count+" and input without space: "+result);
+    }
+
+    static void ReplaceCharacterAndCharacterFrequency(){
+        Scanner sc = new Scanner(System.in);
+        int i,count =0;
+        System.out.println("Enter input string: ");
+        String str = sc.nextLine(), result = "";
+        System.out.println("Enter character to be searched: ");
+        char str1 = sc.next().charAt(0);
+        System.out.println("Enter character to be replaced: ");
+        char str2 = sc.next().charAt(0);
+        for (i=0;i<str.length();i++){
+            if (str.charAt(i) == str1){
+                result = result + str2;
+                count++;
+            }
+            else {
+                result = result + str.charAt(i);
+            }
+        }
+        System.out.println("Number of occurrence of "+str1+" is "+count+"\n"+"Output string: "+result);
+    }
+
+    static void FirstRepeatedAndNonRepeatedCharacter(){
+        Scanner sc = new Scanner(System.in);
+        int count = 0,i,j;
+        System.out.println("Enter the input string: ");
+        String str = sc.next();
+        for ( i=0;i<str.length();i++){
+            count = 0;
+            for ( j = i+1;j<str.length();j++){
+                if (i!=j && str.charAt(i) == str.charAt(j)){
+                    count++;
+                }
+            }
+            if (count==0){
+                System.out.println("First non repeated character: "+str.charAt(i));
+                break;
+            }
+        }
+        for ( i=0;i<str.length();i++){
+            count = 0;
+            for ( j = i+1;j<str.length();j++){
+                if (i!=j && str.charAt(i) == str.charAt(j)){
+                    count++;
+                }
+            }
+            if (count > 0){
+                System.out.println("First repeated character: "+str.charAt(i));
+                break;
+            }
+        }
+    }
+
+    static void RemoveDuplicateChar(){
+        Scanner sc = new Scanner(System.in);
+        boolean seen = false;
+        System.out.println("Enter input string: ");
+        String str = sc.next(),result = "";
+        for (int i=0;i<str.length();i++){
+            seen = false;
+            for (int j=0; j<i;j++){
+                if (str.charAt(i) == str.charAt(j)) {
+                    seen = true;
+                }
+                }
+            if (seen == false){
+                result = result+str.charAt(i);
+            }
+            }
+        System.out.print("String without duplicates: "+result);
+
+    }
+
+    static void CheckAnagram(){
+        Scanner sc = new Scanner (System.in);
+        boolean isAnagram = true;
+        int count = 0, count1 = 0;
+        System.out.println("Enter input string 1: ");
+        String str1 = sc.next();
+        System.out.println("Enter input string 2: ");
+        String str2 = sc.next();
+        if (str1.length() == str2.length()){
+            for (int i=0;i<str1.length();i++){
+                count = 0;
+                count1 = 0;
+                for (int j=0;j<str2.length();j++){
+                    if (str1.charAt(i) == str2.charAt(j)){
+                        count ++;
+                    }
+                }
+                for (int k=0;k<str1.length();k++){
+                    if (str1.charAt(i) == str1.charAt(k)){
+                        count1 ++;
+                    }
+                }
+                if (count1!=count){
+                    isAnagram = false;
+                }
+            }
+            if (isAnagram){
+                System.out.println("It's an anagram");
+            }
+            else {
+                System.out.println("It's not an anagram");
+            }
+        }
+        else {
+            System.out.println("It's not an anagram");
+        }
+    }
+
+    static void StringCompressionAndExpansion(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter input string: ");
+        String str = sc.next(), result = "";
+        boolean seen = false;
+        int i,j, count = 0;
+        for (i=0;i<str.length();i++){
+            seen = false;
+            count = 1;
+            for (j=i+1;j<str.length();j++){
+                if(str.charAt(i)==str.charAt(j)){
+                    count++;
+                    seen = true;
+                }
+                else if (str.charAt(i)!=str.charAt(j)){
+                    break;
+                }
+            }
+            if (seen){
+                result = result + str.charAt(i) + count;
+        }
+            else {
+                result = result + str.charAt(i) + count;
+            }
+            i += count - 1;
+        }
+        System.out.println ("Compression of entered string: "+result);
+        System.out.println("Enter input string for expansion: ");
+        String str1 = sc.next(),result1 = "";
+        int k,l,count1 = 0;
+        for (k=1;k<str1.length();k++){
+            if(Character.isLetter(str1.charAt(k-1))) {
+                for (l = 1; l <= str1.charAt(k)-'0'; l++) {
+                    result1 = result1 + str1.charAt(k - 1);
+                }
+            }
+        }
+        System.out.println ("Expansion of entered string: "+result1);
+    }
+
+    static void LongestAndShortestWord(){
+        Scanner sc = new Scanner(System.in);
+        int count = 0,maxCount = 0, minCount = 0;
+        System.out.println("Enter input line: ");
+        String str = sc.nextLine(), result = "";
+        for (int i = 0;i<str.length();i++){
+            count = 0;
+            for (int j = 0; j < str.length(); j++) {
+                if (str.charAt(i) != ' ') {
+                    result = result + str.charAt(i);
+                    count++;
+                }
+            }
+        }
+        if (count>maxCount){
+            maxCount = count;
+            System.out.println("Longest word: "+result);
+        }
+        for (int i = 0;i<str.length();i++) {
+            count = 0;
+
+            for (int j = 0; j < str.length(); j++) {
+                if (str.charAt(i) != ' ') {
+                    result = result + str.charAt(i);
+                    count++;
+                }
+            }
+        }
+        if (count<minCount) {
+            minCount = count;
+            System.out.println("Shortest word: "+result);
+        }
+
+    }
+
+
 
 
 
