@@ -4021,36 +4021,51 @@ public class Foundation {
 
     static void LongestAndShortestWord(){
         Scanner sc = new Scanner(System.in);
-        int count = 0,maxCount = 0, minCount = 0;
+        int count = 0,maxCount = 0, minCount = 100;
         System.out.println("Enter input line: ");
-        String str = sc.nextLine(), result = "";
+        String str = sc.nextLine(), result = "",longestWord = "",shortestWord = "";
         for (int i = 0;i<str.length();i++){
             count = 0;
-            for (int j = 0; j < str.length(); j++) {
                 if (str.charAt(i) != ' ') {
                     result = result + str.charAt(i);
                     count++;
-                }
             }
+                else {
+                    if (result.length() > maxCount) {
+                        maxCount = result.length();
+                        longestWord = result;
+                    }
+                    count = 0;
+                    result = "";
+                }
         }
-        if (count>maxCount){
-            maxCount = count;
-            System.out.println("Longest word: "+result);
+        if (result.length() > maxCount) {
+            maxCount = result.length();
+            longestWord = result;
         }
+        System.out.println("Longest word: "+longestWord);
+        result = "";
         for (int i = 0;i<str.length();i++) {
             count = 0;
-
-            for (int j = 0; j < str.length(); j++) {
                 if (str.charAt(i) != ' ') {
                     result = result + str.charAt(i);
                     count++;
-                }
             }
+                else {
+                    if (!result.isEmpty() && result.length() < minCount){
+                        minCount = result.length();
+                        shortestWord  = result;
+                    }
+                    count = 0;
+                    result = "";
+                }
+
         }
-        if (count<minCount) {
-            minCount = count;
-            System.out.println("Shortest word: "+result);
+        if (result.length() < minCount){
+            minCount = result.length();
+            shortestWord  = result;
         }
+        System.out.println("Shortest word: "+shortestWord);
 
     }
 
