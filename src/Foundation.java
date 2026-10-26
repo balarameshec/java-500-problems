@@ -158,6 +158,7 @@ public class Foundation {
         System.out.println("150. Check anagram");
         System.out.println("151. String compression and expansion");
         System.out.println("152. Longest and shortest word");
+        System.out.println("153. Longest common prefix");
 
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
@@ -465,6 +466,8 @@ public class Foundation {
             StringCompressionAndExpansion();
         } else if (choice == 152) {
             LongestAndShortestWord();
+        } else if (choice == 153) {
+            LongestCommonPrefix();
         }
     }
 
@@ -4068,6 +4071,48 @@ public class Foundation {
         System.out.println("Shortest word: "+shortestWord);
 
     }
+
+    static void LongestCommonPrefix(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of elements in an array: ");
+        int a = sc.nextInt(),i,j,minCount = 100;
+        boolean appendChar = true;
+        System.out.println("Enter elements in an array: ");
+        String [] arr = new String[a];
+        String commonPrefix = "";
+        for (i=0;i<a;i++){
+                arr [i] = sc.next();
+        }
+        System.out.println("Output of entered array: ");
+        for (i=0;i<a;i++){
+                System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+        System.out.println("Longest common prefix: ");
+            for (i=0;i<a;i++){
+                if (arr[i].length()<minCount){
+                    minCount = arr[i].length();
+                }}
+                for (j=0;j<minCount; j++){
+                    appendChar = true;
+                    for (i=0;i<a;i++) {
+                        if (arr[i].charAt(j)!=arr[0].charAt(j)){
+                    appendChar = false;
+                    break;
+                }
+
+                }
+                    if (appendChar) {
+                        commonPrefix += arr[0].charAt(j);
+                    }
+                    else {
+                        break;
+                    }
+                }
+                System.out.println(commonPrefix);
+            }
+
+
 
 
 
